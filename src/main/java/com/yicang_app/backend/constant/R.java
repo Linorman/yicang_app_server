@@ -26,7 +26,7 @@ public class R<T> {
         return r;
     }
 
-    public static <T> R<T> failure(ResultCode resultCode, T data) {
+    public static <T> R<T> error(ResultCode resultCode, T data) {
         R<T> r = new R<>();
         r.success = 0;
         r.setCode(resultCode.getCode());

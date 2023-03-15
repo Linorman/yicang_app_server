@@ -3,7 +3,7 @@ package com.yicang_app.backend.constant;
 /**
  * 权限编码
  * @author linorman
- * @date 2020/7/15 10:45
+ * @date 2022/7/15 10:45
  */
 public enum PermissionCode {
     /**

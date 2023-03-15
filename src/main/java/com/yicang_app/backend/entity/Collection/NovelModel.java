@@ -6,6 +6,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 小说模型
+ * @author linorman
+ * @data 2023/03/15
+ */
 @Data
 public class NovelModel implements Serializable {
     @TableField(fill = FieldFill.INSERT)
