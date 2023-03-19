@@ -31,6 +31,7 @@ public enum ResultCode {
      */
     USER_SUCCESS(3000L, "用户操作成功"),
     USER_NOT_EXIST(3001L, "用户不存在"),
+    USER_EXISTS(3005L, "用户已存在"),
     USER_PASSWORD_ERROR(3002L, "密码错误"),
     USER_ACCOUNT_LOCKED(3003L, "账号已被锁定"),
     USER_PERMISSION_DENIED(3004L, "权限不足");

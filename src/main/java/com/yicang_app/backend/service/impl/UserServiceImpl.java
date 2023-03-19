@@ -4,13 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yicang_app.backend.constant.R;
 import com.yicang_app.backend.constant.ResultCode;
+import com.yicang_app.backend.entity.User.UserCollectionNovel;
 import com.yicang_app.backend.entity.User.UserInfo;
-import com.yicang_app.backend.mapper.UserMapper;
+import com.yicang_app.backend.mapper.User.UserCollectionNovelMapper;
+import com.yicang_app.backend.mapper.User.UserCollectionPaintingMapper;
+import com.yicang_app.backend.mapper.User.UserInfoMapper;
 import com.yicang_app.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * User Service Impl
@@ -19,12 +23,20 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserService {
     @Autowired
-    private UserMapper userMapper;
+    private UserInfoMapper userMapper;
+
+    @Autowired
+    private UserCollectionNovelMapper userCollectionNovelMapper;
+
+    @Autowired
+    private UserCollectionPaintingMapper userCollectionPaintingMapper;
 
     @Override
-    public R login(String username, String password) {
+    public R login(UserInfo user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
         LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserInfo::getUsername, username);
         UserInfo temp = userMapper.selectOne(queryWrapper);
@@ -44,4 +56,50 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
         log.info("用户登陆成功{}", temp);
         return R.success(ResultCode.USER_SUCCESS, temp);
     }
+
+    @Override
+    public R register(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserInfo::getUsername, username);
+        UserInfo temp = userMapper.selectOne(queryWrapper);
+        if (temp != null) {
+            log.info("用户已存在");
+            return R.error(ResultCode.USER_EXISTS, null);
+        }
+        userInfo.setStatus(1);
+        userMapper.insert(userInfo);
+        log.info("用户注册成功");
+        return R.success(ResultCode.USER_SUCCESS, null);
+
+    }
+
+    @Override
+    public R changePassword(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        String password = userInfo.getPassword();
+        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserInfo::getUsername, username);
+        UserInfo temp = userMapper.selectOne(queryWrapper);
+        if (temp == null) {
+            log.info("用户不存在");
+            return R.error(ResultCode.USER_NOT_EXIST, null);
+        }
+        userMapper.updateById(userInfo);
+        log.info("用户修改密码成功");
+        return R.success(ResultCode.USER_SUCCESS, null);
+    }
+
+    @Override
+    public R logout(UserInfo userInfo) {
+        return null;
+    }
+
+    @Override
+    public R<List<UserCollectionNovel>> getUserCollectionNovel(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        return null;
+    }
+
+
 }
