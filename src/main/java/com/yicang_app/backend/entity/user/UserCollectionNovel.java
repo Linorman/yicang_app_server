@@ -14,9 +14,11 @@ import java.io.Serializable;
 public class UserCollectionNovel implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private String boughtTime;
-    private long id;
-    private long novelId;
+    private Long id;
+    private String username;
+    private Long novelId;
     private String novelName;
     @TableField(fill = FieldFill.INSERT)
     private String updateTime;
+
 }

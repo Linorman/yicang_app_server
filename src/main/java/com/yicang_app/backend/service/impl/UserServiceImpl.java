@@ -1,14 +1,15 @@
 package com.yicang_app.backend.service.impl;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yicang_app.backend.constant.R;
 import com.yicang_app.backend.constant.ResultCode;
 import com.yicang_app.backend.entity.user.UserCollectionNovel;
 import com.yicang_app.backend.entity.user.UserInfo;
-import com.yicang_app.backend.mapper.user.user_collection_novel.UserCollectionNovelMapper;
-import com.yicang_app.backend.mapper.user.user_collection_painting.UserCollectionPaintingMapper;
-import com.yicang_app.backend.mapper.user.user_info.UserInfoMapper;
+import com.yicang_app.backend.mapper.user.UserCollectionNovelMapper;
+import com.yicang_app.backend.mapper.user.UserCollectionPaintingMapper;
+import com.yicang_app.backend.mapper.user.UserInfoMapper;
 import com.yicang_app.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@DS("user_info")
 public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserService {
     @Autowired
     @Qualifier("userInfoMapper")

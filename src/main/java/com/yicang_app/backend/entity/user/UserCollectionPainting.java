@@ -15,8 +15,9 @@ import java.io.Serializable;
 public class UserCollectionPainting implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private String boughtTime;
-    private long id;
-    private long paintingId;
+    private Long id;
+    private String username;
+    private Long paintingId;
     private String paintingName;
     @TableField(fill = FieldFill.INSERT)
     private String updateTime;

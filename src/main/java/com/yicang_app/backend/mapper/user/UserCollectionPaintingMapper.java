@@ -1,4 +1,4 @@
-package com.yicang_app.backend.mapper.user.user_collection_painting;
+package com.yicang_app.backend.mapper.user;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

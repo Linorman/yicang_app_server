@@ -13,7 +13,8 @@ import java.io.Serializable;
  */
 @Data
 public class UserInfo implements Serializable{
-    private long characterCode;
+    private Long id;
+    private Long characterCode;
     @TableField(fill = FieldFill.INSERT)
     private String createTime;
     private String password;
