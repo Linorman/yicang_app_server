@@ -5,8 +5,7 @@ import com.yicang_app.backend.entity.user.UserInfo;
 import com.yicang_app.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户控制器
@@ -20,14 +19,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-
     /**
      * 用户登录
      * @param userInfo 用户信息
      * @return R
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public R login(UserInfo userInfo){
         return userService.login(userInfo);
     }
@@ -37,7 +34,7 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public R register(UserInfo userInfo){
         return userService.register(userInfo);
     }
@@ -47,7 +44,7 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @RequestMapping("/changePassword")
+    @PutMapping("/changePassword")
     public R changePassword(UserInfo userInfo){
         return userService.changePassword(userInfo);
     }
@@ -57,8 +54,28 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @RequestMapping("/logout")
+    @PostMapping("/logout")
     public R logout(UserInfo userInfo){
         return userService.logout(userInfo);
+    }
+
+    /**
+     * 获取用户小说藏品
+     * @param userInfo 用户信息
+     * @return R
+     */
+    @GetMapping("/collection_novel")
+    public R getUserCollectionNovel(UserInfo userInfo){
+        return userService.getUserCollectionNovel(userInfo);
+    }
+
+    /**
+     * 获取用户画作藏品
+     * @param userInfo 用户信息
+     * @return R
+     */
+    @GetMapping("/collection_painting")
+    public R getUserCollectionPainting(UserInfo userInfo){
+        return userService.getUserCollectionPainting(userInfo);
     }
 }

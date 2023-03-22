@@ -3,6 +3,7 @@ package com.yicang_app.backend.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yicang_app.backend.constant.R;
 import com.yicang_app.backend.entity.user.UserCollectionNovel;
+import com.yicang_app.backend.entity.user.UserCollectionPainting;
 import com.yicang_app.backend.entity.user.UserInfo;
 
 import java.util.List;
@@ -47,4 +48,11 @@ public interface UserService extends IService<UserInfo> {
      * @return R
      */
     R<List<UserCollectionNovel>> getUserCollectionNovel(UserInfo user);
+
+    /**
+     * 用户收藏画作
+     * @param user 用户信息
+     * @return R
+     */
+    R<List<UserCollectionPainting>> getUserCollectionPainting(UserInfo user);
 }

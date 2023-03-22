@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yicang_app.backend.constant.R;
 import com.yicang_app.backend.constant.ResultCode;
 import com.yicang_app.backend.entity.user.UserCollectionNovel;
+import com.yicang_app.backend.entity.user.UserCollectionPainting;
 import com.yicang_app.backend.entity.user.UserInfo;
 import com.yicang_app.backend.mapper.user.UserCollectionNovelMapper;
 import com.yicang_app.backend.mapper.user.UserCollectionPaintingMapper;
@@ -83,7 +84,6 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Override
     public R changePassword(UserInfo userInfo) {
         String username = userInfo.getUsername();
-        String password = userInfo.getPassword();
         LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserInfo::getUsername, username);
         UserInfo temp = userMapper.selectOne(queryWrapper);
@@ -104,8 +104,26 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Override
     public R<List<UserCollectionNovel>> getUserCollectionNovel(UserInfo userInfo) {
         String username = userInfo.getUsername();
-        return null;
+        LambdaQueryWrapper<UserCollectionNovel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserCollectionNovel::getUsername, username);
+        List<UserCollectionNovel> userCollectionNovels = userCollectionNovelMapper.selectList(queryWrapper);
+        if (userCollectionNovels == null) {
+            log.info("用户收藏小说为空");
+            return R.error(ResultCode.RECORD_NOT_EXIST, null);
+        }
+        return R.success(ResultCode.USER_SUCCESS, userCollectionNovels);
     }
 
-
+    @Override
+    public R<List<UserCollectionPainting>> getUserCollectionPainting(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        LambdaQueryWrapper<UserCollectionPainting> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserCollectionPainting::getUsername, username);
+        List<UserCollectionPainting> userCollectionPaintings = userCollectionPaintingMapper.selectList(queryWrapper);
+        if (userCollectionPaintings == null) {
+            log.info("用户收藏画作为空");
+            return R.error(ResultCode.RECORD_NOT_EXIST, null);
+        }
+        return R.success(ResultCode.USER_SUCCESS, userCollectionPaintings);
+    }
 }
