@@ -1,8 +1,9 @@
-package com.yicang_app.backend.mapper.User;
+package com.yicang_app.backend.mapper.user.user_info;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yicang_app.backend.entity.User.UserInfo;
+import com.yicang_app.backend.entity.user.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.annotation.MapperScan;
 
 /**
  * User Mapper

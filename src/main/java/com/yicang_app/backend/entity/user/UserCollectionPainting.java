@@ -1,4 +1,4 @@
-package com.yicang_app.backend.entity.User;
+package com.yicang_app.backend.entity.user;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

@@ -1,5 +1,6 @@
-package com.yicang_app.backend.config;
+package com.yicang_app.backend.config.user_database_config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,22 +14,22 @@ import javax.sql.DataSource;
  * @date 2023/03/19
  */
 @Configuration
-public class DataSourceConfig {
+public class UserDataSourceConfig {
     @Bean(name = "userInfoDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.user-info")
     public DataSource userInfoDataSource() {
-        return DataSourceBuilder.create().build();
+        return new DruidDataSource();
     }
 
     @Bean(name = "userCollectionNovelDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.user-collection-novel")
     public DataSource userCollectionNovelDataSource() {
-        return DataSourceBuilder.create().build();
+        return new DruidDataSource();
     }
 
     @Bean(name = "userCollectionPaintingDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.user-collection-painting")
     public DataSource userCollectionPaintingDataSource() {
-        return DataSourceBuilder.create().build();
+        return new DruidDataSource();
     }
 }

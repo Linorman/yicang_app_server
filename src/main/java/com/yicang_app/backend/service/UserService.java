@@ -2,8 +2,8 @@ package com.yicang_app.backend.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yicang_app.backend.constant.R;
-import com.yicang_app.backend.entity.User.UserCollectionNovel;
-import com.yicang_app.backend.entity.User.UserInfo;
+import com.yicang_app.backend.entity.user.UserCollectionNovel;
+import com.yicang_app.backend.entity.user.UserInfo;
 
 import java.util.List;
 
