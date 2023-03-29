@@ -5,14 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yicang_app.backend.constant.R;
 import com.yicang_app.backend.constant.ResultCode;
+import com.yicang_app.backend.entity.collection.NovelModel;
 import com.yicang_app.backend.entity.user.UserCollectionNovel;
 import com.yicang_app.backend.entity.user.UserCollectionPainting;
 import com.yicang_app.backend.entity.user.UserInfo;
 import com.yicang_app.backend.mapper.user.UserCollectionNovelMapper;
 import com.yicang_app.backend.mapper.user.UserCollectionPaintingMapper;
 import com.yicang_app.backend.mapper.user.UserInfoMapper;
+import com.yicang_app.backend.mapper.userInterest.UserInterestNovelMapper;
 import com.yicang_app.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -39,6 +42,10 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Autowired
     @Qualifier("userCollectionPaintingMapper")
     private UserCollectionPaintingMapper userCollectionPaintingMapper;
+
+    @Autowired
+    @Qualifier("userInterestNovelMapper")
+    private UserInterestNovelMapper userInterestNovelMapper;
 
     @Override
     public R login(UserInfo user) {
@@ -102,6 +109,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     }
 
     @Override
+    @DS("user_collection_novel")
     public R<List<UserCollectionNovel>> getUserCollectionNovel(UserInfo userInfo) {
         String username = userInfo.getUsername();
         LambdaQueryWrapper<UserCollectionNovel> queryWrapper = new LambdaQueryWrapper<>();
@@ -115,6 +123,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     }
 
     @Override
+    @DS("user_collection_painting")
     public R<List<UserCollectionPainting>> getUserCollectionPainting(UserInfo userInfo) {
         String username = userInfo.getUsername();
         LambdaQueryWrapper<UserCollectionPainting> queryWrapper = new LambdaQueryWrapper<>();
@@ -125,5 +134,18 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
             return R.error(ResultCode.RECORD_NOT_EXIST, null);
         }
         return R.success(ResultCode.USER_SUCCESS, userCollectionPaintings);
+    }
+
+    @Override
+    @DS("user_interest_novel")
+    public R<List<NovelModel>> getUserInterestNovelList(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        String tableName = "user_interest_novel_" + username;
+        List<NovelModel> novelModels = userInterestNovelMapper.selectUserInterestNovel(tableName);
+        if (novelModels == null) {
+            log.info("用户感兴趣小说为空");
+            return R.error(ResultCode.RECORD_NOT_EXIST, null);
+        }
+        return R.success(ResultCode.USER_SUCCESS, novelModels);
     }
 }

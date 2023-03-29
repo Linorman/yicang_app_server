@@ -75,7 +75,17 @@ public class UserController {
      * @return R
      */
     @GetMapping("/collection_painting")
-    public R getUserCollectionPainting(UserInfo userInfo){
+    public R getUserCollectionPainting(UserInfo userInfo) {
         return userService.getUserCollectionPainting(userInfo);
+    }
+
+    /**
+     * 获取用户关注的画作列表
+     * @param userInfo 用户信息
+     * @return R
+     */
+    @GetMapping("/interest_novel_list")
+    public R getUserInterestNovelList(UserInfo userInfo) {
+        return userService.getUserInterestNovelList(userInfo);
     }
 }
