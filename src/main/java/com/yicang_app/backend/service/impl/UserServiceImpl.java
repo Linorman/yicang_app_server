@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yicang_app.backend.constant.R;
 import com.yicang_app.backend.constant.ResultCode;
 import com.yicang_app.backend.entity.collection.NovelModel;
+import com.yicang_app.backend.entity.collection.PaintingModel;
 import com.yicang_app.backend.entity.user.UserCollectionNovel;
 import com.yicang_app.backend.entity.user.UserCollectionPainting;
 import com.yicang_app.backend.entity.user.UserInfo;
@@ -13,6 +14,7 @@ import com.yicang_app.backend.mapper.user.UserCollectionNovelMapper;
 import com.yicang_app.backend.mapper.user.UserCollectionPaintingMapper;
 import com.yicang_app.backend.mapper.user.UserInfoMapper;
 import com.yicang_app.backend.mapper.userInterest.UserInterestNovelMapper;
+import com.yicang_app.backend.mapper.userInterest.UserInterestPaintingMapper;
 import com.yicang_app.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
@@ -46,6 +48,11 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Autowired
     @Qualifier("userInterestNovelMapper")
     private UserInterestNovelMapper userInterestNovelMapper;
+
+    @Autowired
+    @Qualifier("userInterestPaintingMapper")
+    private UserInterestPaintingMapper userInterestPaintingMapper;
+
 
     @Override
     public R login(UserInfo user) {
@@ -147,5 +154,18 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
             return R.error(ResultCode.RECORD_NOT_EXIST, null);
         }
         return R.success(ResultCode.USER_SUCCESS, novelModels);
+    }
+
+    @Override
+    @DS("user_interest_painting")
+    public R<List<PaintingModel>> getUserInterestPaintingList(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        String tableName = "user_interest_painting_" + username;
+        List<PaintingModel> paintingModels = userInterestPaintingMapper.selectUserInterestPainting(tableName);
+        if (paintingModels == null) {
+            log.info("用户感兴趣画作为空");
+            return R.error(ResultCode.RECORD_NOT_EXIST, null);
+        }
+        return R.success(ResultCode.USER_SUCCESS, paintingModels);
     }
 }

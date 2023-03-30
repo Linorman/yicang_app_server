@@ -80,12 +80,22 @@ public class UserController {
     }
 
     /**
-     * 获取用户关注的画作列表
+     * 获取用户关注的小说列表
      * @param userInfo 用户信息
      * @return R
      */
     @GetMapping("/interest_novel_list")
     public R getUserInterestNovelList(UserInfo userInfo) {
         return userService.getUserInterestNovelList(userInfo);
+    }
+
+    /**
+     * 获取用户关注的画作列表
+     * @param userInfo 用户信息
+     * @return R
+     */
+    @GetMapping("/interest_painting_list")
+    public R getUserInterestPaintingList(UserInfo userInfo) {
+        return userService.getUserInterestPaintingList(userInfo);
     }
 }
