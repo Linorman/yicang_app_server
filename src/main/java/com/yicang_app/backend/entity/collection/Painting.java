@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @data 2023/03/15
  */
 @Data
-public class PaintingModel implements Serializable {
+public class Painting implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private String createTime;
     private String filePath;

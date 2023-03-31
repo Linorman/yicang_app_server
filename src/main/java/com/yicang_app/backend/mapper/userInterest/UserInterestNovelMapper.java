@@ -1,7 +1,7 @@
 package com.yicang_app.backend.mapper.userInterest;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yicang_app.backend.entity.collection.NovelModel;
+import com.yicang_app.backend.entity.collection.Novel;
 import com.yicang_app.backend.entity.user.UserCollectionNovel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,5 +16,5 @@ import java.util.List;
 @Mapper
 public interface UserInterestNovelMapper extends BaseMapper<UserCollectionNovel> {
     @Select("SELECT * FROM ${tableName}")
-    List<NovelModel> selectUserInterestNovel(@Param("tableName") String tableName);
+    List<Novel> selectUserInterestNovel(@Param("tableName") String tableName);
 }
