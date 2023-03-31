@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @data 2023/03/15
  */
 @Data
-public class NovelModel implements Serializable {
+public class Novel implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private String createTime;
     private String filePath;

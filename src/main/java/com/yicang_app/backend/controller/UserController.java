@@ -64,7 +64,7 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @GetMapping("/collection_novel")
+    @GetMapping("/collectionNovel")
     public R getUserCollectionNovel(UserInfo userInfo){
         return userService.getUserCollectionNovel(userInfo);
     }
@@ -74,7 +74,7 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @GetMapping("/collection_painting")
+    @GetMapping("/collectionPainting")
     public R getUserCollectionPainting(UserInfo userInfo) {
         return userService.getUserCollectionPainting(userInfo);
     }
@@ -84,7 +84,7 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @GetMapping("/interest_novel_list")
+    @GetMapping("/interestNovelList")
     public R getUserInterestNovelList(UserInfo userInfo) {
         return userService.getUserInterestNovelList(userInfo);
     }
@@ -94,7 +94,7 @@ public class UserController {
      * @param userInfo 用户信息
      * @return R
      */
-    @GetMapping("/interest_painting_list")
+    @GetMapping("/interestPaintingList")
     public R getUserInterestPaintingList(UserInfo userInfo) {
         return userService.getUserInterestPaintingList(userInfo);
     }

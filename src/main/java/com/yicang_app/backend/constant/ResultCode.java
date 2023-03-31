@@ -2,6 +2,7 @@ package com.yicang_app.backend.constant;
 
 /**
  * 结果集枚举
+ *
  * @author linorman
  * @data 2023/03/13
  */
@@ -23,8 +24,21 @@ public enum ResultCode {
     PARAMETER_ERROR(804L, "参数错误"),
     INVALID_PARAMETER(805L, "不合法的参数"),
     MISS_PARAMETER(806L, "缺少参数"),
-    REPEAT_RECORD(807L,"重复记录"),
-    RECORD_NOT_EXIST(808L,"记录不存在"),
+    REPEAT_RECORD(807L, "重复记录"),
+    RECORD_NOT_EXIST(808L, "记录不存在"),
+    RECORD_EXISTS(809L, "记录已存在"),
+    NOVEL_EMPTY(810L, "小说列表为空"),
+    PAINTING_EMPTY(811L, "画作列表为空"),
+    NOVEL_NOT_EXIST(812L, "小说不存在"),
+    PAINTING_NOT_EXIST(813L, "画作不存在"),
+    NOVEL_EXISTS(814L, "小说已存在"),
+    PAINTING_EXISTS(815L, "画作已存在"),
+    NOVEL_COLLECTION_EXISTS(816L, "小说已收藏"),
+    PAINTING_COLLECTION_EXISTS(817L, "画作已收藏"),
+    NOVEL_COLLECTION_NOT_EXIST(818L, "小说未收藏"),
+    PAINTING_COLLECTION_NOT_EXIST(819L, "画作未收藏"),
+    NOVEL_COLLECTION_EMPTY(820L, "小说收藏列表为空"),
+    PAINTING_COLLECTION_EMPTY(821L, "画作收藏列表为空"),
 
     /**
      * 用户操作
@@ -38,6 +52,7 @@ public enum ResultCode {
 
     private Long code;
     private String msg;
+
     ResultCode(long code, String msg) {
         this.code = code;
         this.msg = msg;
