@@ -71,4 +71,11 @@ public interface UserService extends IService<UserInfo> {
      * @return R
      */
     R<List<Painting>> getUserInterestPaintingList(UserInfo user);
+
+    /**
+     * 修改用户签名
+     * @param userInfo
+     * @return R
+     */
+    R setSignature(UserInfo userInfo);
 }

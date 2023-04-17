@@ -147,6 +147,9 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     public R<List<Novel>> getUserInterestNovelList(UserInfo userInfo) {
         String username = userInfo.getUsername();
         String tableName = "user_interest_novel_" + username;
+        if (userInterestNovelMapper.tableExists(tableName) == 0) {
+            userInterestNovelMapper.createUserInterestNovelTable(username);
+        }
         List<Novel> novelModels = userInterestNovelMapper.selectUserInterestNovel(tableName);
         if (novelModels == null) {
             log.info("用户感兴趣小说为空");
@@ -160,11 +163,30 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     public R<List<Painting>> getUserInterestPaintingList(UserInfo userInfo) {
         String username = userInfo.getUsername();
         String tableName = "user_interest_painting_" + username;
+        if (userInterestPaintingMapper.tableExists(tableName) == 0) {
+            userInterestPaintingMapper.createUserInterestPaintingTable(username);
+        }
         List<Painting> paintingModels = userInterestPaintingMapper.selectUserInterestPainting(tableName);
         if (paintingModels == null) {
             log.info("用户感兴趣画作为空");
             return R.error(ResultCode.RECORD_NOT_EXIST, null);
         }
         return R.success(ResultCode.USER_SUCCESS, paintingModels);
+    }
+
+    @Override
+    public R setSignature(UserInfo userInfo) {
+        String username = userInfo.getUsername();
+        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserInfo::getUsername, username);
+        UserInfo temp = userMapper.selectOne(queryWrapper);
+        if (temp == null) {
+            log.info("用户不存在");
+            return R.error(ResultCode.USER_NOT_EXIST, null);
+        }
+        temp.setSignature(userInfo.getSignature());
+        userMapper.updateById(temp);
+        log.info("用户修改签名成功");
+        return R.success(ResultCode.USER_SUCCESS, null);
     }
 }

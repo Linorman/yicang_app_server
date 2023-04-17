@@ -98,4 +98,14 @@ public class UserController {
     public R getUserInterestPaintingList(UserInfo userInfo) {
         return userService.getUserInterestPaintingList(userInfo);
     }
+
+    /**
+     * 修改用户签名
+     * @param userInfo 用户信息
+     * @return R
+     */
+    @PostMapping("/setSignature")
+    public R setSignature(UserInfo userInfo) {
+        return userService.setSignature(userInfo);
+    }
 }
