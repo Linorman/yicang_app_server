@@ -17,13 +17,14 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class FileServiceImpl implements FileService {
+    private static final String FILE_PATH = "/home/yicang_app/yicang_app_server/collections";
     public void saveFile(String path, byte[] data) throws IOException {
-        File file = new File(path);
+        File file = new File(FILE_PATH + path);
         FileUtils.writeByteArrayToFile(file, data);
     }
 
     public Optional<File> getFileByPath(String path) {
-        File file = new File(path);
+        File file = new File(FILE_PATH + path);
         if (file.exists()) {
             return Optional.of(file);
         } else {

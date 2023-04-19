@@ -84,4 +84,39 @@ public class MallServiceImpl extends ServiceImpl<MallNovelMapper, Novel> impleme
         }
         return R.success(ResultCode.SUCCESS, painting);
     }
+
+    @Override
+    public R addNovel(Novel novelInfo) {
+        LambdaQueryWrapper<Novel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Novel::getNovelName, novelInfo.getNovelName());
+        Novel novel = mallNovelMapper.selectOne(queryWrapper);
+        if (novel != null) {
+            log.info("novel is exist");
+            return R.error(ResultCode.NOVEL_COLLECTION_EXISTS, null);
+        }
+        int result = mallNovelMapper.insert(novelInfo);
+        if (result == 0) {
+            log.info("add novel failed");
+            return R.error(ResultCode.FAIL, null);
+        }
+        return R.success(ResultCode.SUCCESS, null);
+    }
+
+    @Override
+    public R addPainting(Painting paintingInfo) {
+        LambdaQueryWrapper<Painting> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Painting::getPaintingName, paintingInfo.getPaintingName());
+        Painting painting = mallPaintingMapper.selectOne(queryWrapper);
+        if (painting != null) {
+            log.info("painting is exist");
+            return R.error(ResultCode.PAINTING_COLLECTION_EXISTS, null);
+        }
+        int result = mallPaintingMapper.insert(paintingInfo);
+        if (result == 0) {
+            log.info("add painting failed");
+            return R.error(ResultCode.FAIL, null);
+        }
+        return R.success(ResultCode.SUCCESS, null);
+    }
+
 }

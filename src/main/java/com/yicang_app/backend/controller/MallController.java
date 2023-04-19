@@ -8,6 +8,7 @@ import com.yicang_app.backend.service.MallService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,5 +62,25 @@ public class MallController {
     @GetMapping("/paintingInfo")
     public R paintingDetail(Painting paintingInfo){
         return mallService.paintingInfo(paintingInfo);
+    }
+
+    /**
+     * 添加画作
+     * @param paintingInfo 画作信息
+     * @return R
+     */
+    @PostMapping("/addPainting")
+    public R addPainting(Painting paintingInfo){
+        return mallService.addPainting(paintingInfo);
+    }
+
+    /**
+     * 添加小说
+     * @param novelInfo 小说信息
+     * @return R
+     */
+    @PostMapping("/addNovel")
+    public R addNovel(Novel novelInfo){
+        return mallService.addNovel(novelInfo);
     }
 }

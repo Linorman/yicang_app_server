@@ -14,6 +14,11 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+/**
+ * 文件控制器
+ * @author linorman
+ * @date 2023/04/19
+ */
 @Slf4j
 @RestController
 @RequestMapping("/files")
@@ -22,6 +27,12 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
+    /**
+     * 文件上传
+     * @param file
+     * @param path
+     * @return
+     */
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
                                              @RequestParam("path") String path) {
@@ -35,6 +46,12 @@ public class FileController {
         return ResponseEntity.ok().body("File uploaded successfully");
     }
 
+    /**
+     * 文件更新
+     * @param path
+     * @param file
+     * @return
+     */
     @PutMapping("/{path:.+}/update")
     public ResponseEntity<String> updateFile(@PathVariable String path,
                                              @RequestParam("file") MultipartFile file) {
@@ -53,7 +70,12 @@ public class FileController {
         }
     }
 
-    @GetMapping("/{path:.+}")
+    /**
+     * 文件下载
+     * @param path
+     * @return
+     */
+    @GetMapping("/{path:.+}/download")
     public ResponseEntity<byte[]> getFile(@PathVariable String path) {
         Optional<File> optionalFile = fileService.getFileByPath(path);
         if (optionalFile.isPresent()) {

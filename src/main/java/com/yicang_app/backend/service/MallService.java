@@ -39,4 +39,18 @@ public interface MallService extends IService<Novel> {
      * @return R
      */
     R<Painting> paintingInfo(Painting paintingInfo);
+
+    /**
+     * 添加小说
+     * @param novelInfo 小说信息
+     * @return R
+     */
+    R addNovel(Novel novelInfo);
+
+    /**
+     * 添加画作
+     * @param paintingInfo 画作信息
+     * @return R
+     */
+    R addPainting(Painting paintingInfo);
 }
